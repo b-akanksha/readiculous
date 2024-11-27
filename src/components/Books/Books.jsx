@@ -6,13 +6,21 @@ import { Box } from "@mui/material";
 
 const Books = () => {
   const dispatch = useDispatch();
-  const { books } = useSelector(state => state.book);
+  const { books } = useSelector((state) => state.book);
   useEffect(() => {
     dispatch(fetchBookData());
   }, []);
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
-      {React.Children.toArray(books.map(book => <Book {...book} />))}
+    <Box
+      sx={{
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "baseline",
+        justifyContent: "center",
+        marginY: 2,
+      }}
+    >
+      {React.Children.toArray(books.map((book) => <Book {...book} />))}
     </Box>
   );
 };
