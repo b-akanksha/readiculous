@@ -52,18 +52,16 @@ const Book = (props) => {
         <img src={image} alt={name} width={"100%"} />
         <Box sx={{ ...classes.flex, marginY: 1, justifyContent: "center" }}>
           {genre.split("&").length > 0 &&
-            genre
-              .split("&")
-              .map((gen, index) => (
-                <Chip
-                  label={gen}
-                  sx={{
-                    background: colorConstants.button.primaryButton,
-                    color: colorConstants.button.primaryButtonText,
-                    marginX: index !== 0 ? 1 : 0,
-                  }}
-                />
-              ))}
+            genre.split("&").map((gen, index) => (
+              <Chip
+                label={gen}
+                sx={{
+                  background: colorConstants.button.primaryButton,
+                  color: colorConstants.button.primaryButtonText,
+                  marginX: index !== 0 ? 1 : 0,
+                }}
+              />
+            ))}
         </Box>
       </Box>
       <Box marginX={2} flexBasis={"70%"}>

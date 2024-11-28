@@ -14,8 +14,8 @@ const Books = () => {
     <Box
       sx={{
         display: "flex",
+        flexDirection: "row",
         flexWrap: "wrap",
-        alignItems: "baseline",
         justifyContent: "center",
         marginY: 2,
       }}
