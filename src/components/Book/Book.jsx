@@ -1,8 +1,8 @@
 import { Box, Chip, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Img from "../../assets/book.png";
-import { fetchBookCover } from "../../redux/slice/bookSlice";
 import { colorConstants } from "../../utils/colorConstants";
+
 const classes = {
   book: {
     borderRadius: "10px",
@@ -31,26 +31,23 @@ const classes = {
   },
 };
 const Book = (props) => {
-  const { name, author, translatedBy, genre, thoughts, isbn } = props;
-  const [image, setImage] = useState(Img);
-
-  useEffect(() => {
-    if (isbn) {
-      fetchBookCover(isbn).then((resp) => {
-        if (resp) {
-          setImage(resp);
-        } else {
-          setImage(Img);
-        }
-      });
-    }
-  }, [isbn]);
+  const { name, author, translatedBy, genre, thoughts } = props;
 
   return (
     <Box sx={{ ...classes.book, ...classes.flex }}>
-      <Box sx={{ ...classes.flex, ...classes.coverFlex }} flexBasis={"30%"}>
-        <img src={image} alt={name} width={"100%"} />
-        <Box sx={{ ...classes.flex, marginY: 1, justifyContent: "center" }}>
+      <Box
+        sx={{ ...classes.flex, ...classes.coverFlex }}
+        flexBasis={{ sm: "100%", md: "30%" }}
+      >
+        <img src={Img} alt={name} width={"109.44px"} height="109.44px" />
+        <Box
+          sx={{
+            ...classes.flex,
+            marginY: 1,
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
           {genre.split("&").length > 0 &&
             genre.split("&").map((gen, index) => (
               <Chip
@@ -59,12 +56,13 @@ const Book = (props) => {
                   background: colorConstants.button.primaryButton,
                   color: colorConstants.button.primaryButtonText,
                   marginX: index !== 0 ? 1 : 0,
+                  marginY: 1,
                 }}
               />
             ))}
         </Box>
       </Box>
-      <Box marginX={2} flexBasis={"70%"}>
+      <Box marginX={{ sm: 0, md: 2 }} flexBasis={{ sm: "100%", md: "70%" }}>
         <Box>
           <Typography variant="h4" sx={classes.bookTitle}>
             {name}
