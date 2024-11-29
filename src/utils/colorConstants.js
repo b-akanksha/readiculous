@@ -1,4 +1,5 @@
 export const colorConstants = {
+  background: "#242424",
   text: {
     primary: "#FFFFFF",
     secondary: "#B3B3B3",

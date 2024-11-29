@@ -10,16 +10,16 @@ import {
   Radio,
 } from "@mui/material";
 import { colorConstants } from "../../utils/colorConstants";
-import BookByYear from "../BookByYear/BookByYear";
+import BooksByFilter from "../BooksByFilter/BooksByFilter";
 
 const Books = () => {
   const dispatch = useDispatch();
   const { booksByFilter: books, filter } = useSelector((state) => state.book);
-  const [bookFilter, SetBookFilter] = useState(filter);
+  const [bookFilter, SetBookFilter] = useState("");
   const labels = Object.keys(books);
-  console.log({ labels });
 
   useEffect(() => {
+    SetBookFilter(filter);
     dispatch(fetchBookData());
   }, []);
 
@@ -39,10 +39,17 @@ const Books = () => {
       }}
     >
       <Box>
-        <FormControl>
+        <FormControl
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+          }}
+        >
           <FormLabel
             id="filter-radio"
             sx={{
+              marginX: 2,
               color: colorConstants.text.primary,
               "&.MuiFormLabel-root.Mui-focused": {
                 color: colorConstants.text.primary,
@@ -89,11 +96,7 @@ const Books = () => {
           </RadioGroup>
         </FormControl>
       </Box>
-      {React.Children.toArray(
-        labels.map((label) => (
-          <BookByYear label={label} books={books[label]} />
-        )),
-      )}
+      <BooksByFilter labels={labels} books={books} />
     </Box>
   );
 };
